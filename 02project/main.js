@@ -41,7 +41,7 @@ function toggleTask(id) {
 }
 // Function to edit task
 function editTask(id) {
-    var task = tasks.findIndex(function (task) { return task.id === id; });
+    var task = tasks.find(function (task) { return task.id === id; });
     if (!task)
         return;
     var newText = prompt("Edit Task:", task.text);

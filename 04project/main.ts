@@ -16,6 +16,11 @@ celsiusInput.addEventListener("input", () => {
     } else {
         fahrenheitInput.value = "";
     }
+    //parseFloat means floating point number
+    //NaN means not a number
+    //.toFixed(2) two decimal places
+    //this function checking that it is no only no letters are wriiten 
+    
 });
 
 fahrenheitInput.addEventListener("input", () => {

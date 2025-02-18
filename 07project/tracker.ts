@@ -107,3 +107,4 @@ expenseForm.addEventListener('submit', addExpense);
 
 // Initial render
 tracker.renderExpenses();
+

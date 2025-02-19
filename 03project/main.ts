@@ -1,46 +1,91 @@
-import './style.css'
-import { RockPaperScissors, type Choice } from './game'
+type Choice = 'rock' | 'paper' | 'scissors';
 
-const game = new RockPaperScissors();
+class RockPaperScissors {
+  private playerScore: number = 0;
+  private computerScore: number = 0;
+  private resultDiv: HTMLDivElement;
+  private playerChoiceDiv: HTMLDivElement;
+  private computerChoiceDiv: HTMLDivElement;
+  private playerScoreSpan: HTMLSpanElement;
+  private computerScoreSpan: HTMLSpanElement;
 
+  constructor() {
+    this.resultDiv = document.querySelector('.result') as HTMLDivElement;
+    this.playerChoiceDiv = document.querySelector('.player-choice') as HTMLDivElement;
+    this.computerChoiceDiv = document.querySelector('.computer-choice') as HTMLDivElement;
+    this.playerScoreSpan = document.querySelector('.player-score') as HTMLSpanElement;
+    this.computerScoreSpan = document.querySelector('.computer-score') as HTMLSpanElement;
+    
+    this.initializeGame();
+  }
+
+  private initializeGame(): void {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        this.playRound(button.dataset.choice as Choice);
+      });
+    });
+  }
+
+  private getComputerChoice(): Choice {
+    const choices: Choice[] = ['rock', 'paper', 'scissors'];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+  }
+
+  private determineWinner(playerChoice: Choice, computerChoice: Choice): string {
+    if (playerChoice === computerChoice) return 'Tie!';
+
+    const winConditions = {
+      rock: 'scissors',
+      paper: 'rock',
+      scissors: 'paper'
+    };
+
+    if (winConditions[playerChoice] === computerChoice) {
+      this.playerScore++;
+      this.updateScore();
+      return 'You win!';
+    } else {
+      this.computerScore++;
+      this.updateScore();
+      return 'Computer wins!';
+    }
+  }
+
+  private updateScore(): void {
+    this.playerScoreSpan.textContent = this.playerScore.toString();
+    this.computerScoreSpan.textContent = this.computerScore.toString();
+  }
+
+  private playRound(playerChoice: Choice): void {
+    const computerChoice = this.getComputerChoice();
+    
+    this.playerChoiceDiv.textContent = `Your choice: ${playerChoice}`;
+    this.computerChoiceDiv.textContent = `Computer's choice: ${computerChoice}`;
+    
+    const result = this.determineWinner(playerChoice, computerChoice);
+    this.resultDiv.textContent = result;
+  }
+}
+
+// Initialize the game
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="game-container">
     <h1>Rock Paper Scissors</h1>
-    
-    <div class="score-board">
-      <div>Player: <span id="player-score">0</span></div>
-      <div>Computer: <span id="computer-score">0</span></div>
+    <div class="score">
+      Score - You: <span class="player-score">0</span> | Computer: <span class="computer-score">0</span>
     </div>
-
     <div class="choices">
-      <button class="choice-btn" data-choice="rock">🪨 Rock</button>
-      <button class="choice-btn" data-choice="paper">📄 Paper</button>
-      <button class="choice-btn" data-choice="scissors">✂️ Scissors</button>
+      <button data-choice="rock">Rock</button>
+      <button data-choice="paper">Paper</button>
+      <button data-choice="scissors">Scissors</button>
     </div>
-
-    <div id="result" class="result"></div>
+    <div class="player-choice">Your choice: -</div>
+    <div class="computer-choice">Computer's choice: -</div>
+    <div class="result">Make your choice!</div>
   </div>
 `;
 
-const playerScoreElement = document.querySelector<HTMLSpanElement>('#player-score')!;
-const computerScoreElement = document.querySelector<HTMLSpanElement>('#computer-score')!;
-const resultElement = document.querySelector<HTMLDivElement>('#result')!;
-const buttons = document.querySelectorAll<HTMLButtonElement>('.choice-btn');
-
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    const choice = button.dataset.choice as Choice;
-    const { result, computerChoice, playerScore, computerScore } = game.play(choice);
-
-    // Update scores
-    playerScoreElement.textContent = playerScore.toString();
-    computerScoreElement.textContent = computerScore.toString();
-
-    // Show result with appropriate styling
-    resultElement.className = 'result ' + result;
-    resultElement.textContent = `
-      You chose ${choice}, computer chose ${computerChoice}.
-      You ${result}!
-    `;
-  });
-});
+new RockPaperScissors();

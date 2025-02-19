@@ -1,45 +1,105 @@
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-.container {
-    width: 300px;
-    margin: 50px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-input {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 10px;
-    cursor: pointer;
-    margin: 5px;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
+    background: linear-gradient(to right, #00b4db, #0083b0);
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background: #eee;
-    margin: 5px 0;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 1rem;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-box {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-.completed {
-    text-decoration: line-through;
-    color: gray;
-}
+    font-size: 1rem;
+  }
+  
+  .search-button {
+    padding: 0.5rem 1rem;
+    background-color: #0083b0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .search-button:hover {
+    background-color: #006d94;
+  }
+  
+  .weather-info {
+    text-align: center;
+    padding: 1rem;
+    display: none;
+  }
+  
+  .weather-info.active {
+    display: block;
+  }
+  
+  .weather-main {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .temperature {
+    font-size: 3rem;
+    color: #0083b0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .description {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    text-align: left;
+  }
+  
+  .detail-item {
+    padding: 0.5rem;
+    background-color: rgba(0, 131, 176, 0.1);
+    border-radius: 4px;
+  }
+  
+  .error {
+    color: #dc3545;
+    text-align: center;
+    margin-top: 1rem;
+    display: none;
+  }
+  
+  .error.active {
+    display: block;
+  }

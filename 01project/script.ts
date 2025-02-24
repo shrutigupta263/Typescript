@@ -11,14 +11,16 @@ const sessionTypeElement = document.getElementById("session-type") as HTMLDivEle
 const startPauseButton = document.getElementById("start-pause") as HTMLButtonElement
 const resetButton = document.getElementById("reset") as HTMLButtonElement
 
-function formatTime(seconds: number): string {
+function formatTime(seconds: number): string 
+{
   const mins = Math.floor(seconds / 60)
   const secs = seconds % 60
   return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
   //toString().pasStart() means digit should be in 2 digit 
 }
 
-function updateDisplay() {
+function updateDisplay() 
+{
   timerElement.textContent = formatTime(time)
   sessionTypeElement.textContent = isWork ? "Work Session" : "Break Session"
   //isWork is true, its set work session 
